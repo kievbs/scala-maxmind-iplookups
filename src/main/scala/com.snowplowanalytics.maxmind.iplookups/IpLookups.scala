@@ -72,7 +72,8 @@ sealed trait CreateIpLookups[F[_]] {
   )
 }
 
-object CreateIpLookups {
+@SerialVersionUID(100L)
+object CreateIpLookups extends Serializable {
   def apply[F[_]](implicit ev: CreateIpLookups[F]): CreateIpLookups[F] = ev
 
   implicit def syncCreateIpLookups[F[_]: Sync](
