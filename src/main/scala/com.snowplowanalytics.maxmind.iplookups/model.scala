@@ -41,7 +41,6 @@ object model {
     postalCode: Option[String],
     metroCode: Option[Int],
     regionName: Option[String],
-    isInEuropeanUnion: Boolean,
     continent: String,
     accuracyRadius: Int
   )
@@ -57,11 +56,6 @@ object model {
     def apply(cityResponse: CityResponse): IpLocation = {
       // Try to bypass bincompat problem with Spark Enrich,
       // Delete once Spark Enrich is deprecated
-      val isInEuropeanUnion = try {
-        cityResponse.getCountry.isInEuropeanUnion
-      } catch {
-        case _: NoSuchMethodError => false
-      }
       IpLocation(
         countryCode = cityResponse.getCountry.getIsoCode,
         countryName = cityResponse.getCountry.getName,
@@ -73,7 +67,6 @@ object model {
         postalCode = Option(cityResponse.getPostal.getCode),
         metroCode = Option(cityResponse.getLocation.getMetroCode).map(_.toInt),
         regionName = Option(cityResponse.getMostSpecificSubdivision.getName),
-        isInEuropeanUnion = isInEuropeanUnion,
         continent = cityResponse.getContinent.getName,
         accuracyRadius = cityResponse.getLocation.getAccuracyRadius
       )

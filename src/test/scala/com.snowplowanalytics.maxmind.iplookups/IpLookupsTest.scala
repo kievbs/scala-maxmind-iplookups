@@ -79,7 +79,6 @@ object IpLookupsTest {
         postalCode = None,
         metroCode = None,
         regionName = Some("Jilin Sheng"),
-        isInEuropeanUnion = false,
         continent = "Asia",
         accuracyRadius = 100
       ).asRight.some,
@@ -100,7 +99,6 @@ object IpLookupsTest {
         postalCode = Some("98354"),
         metroCode = Some(819),
         regionName = Some("Washington"),
-        isInEuropeanUnion = false,
         continent = "North America",
         accuracyRadius = 22
       ).asRight.some,
@@ -121,7 +119,6 @@ object IpLookupsTest {
         postalCode = None,
         metroCode = None,
         regionName = None,
-        isInEuropeanUnion = false,
         continent = "Asia",
         accuracyRadius = 534
       ).asRight.some,

@@ -243,7 +243,7 @@ class IpLookups[F[_]: Monad] private[iplookups] (
   ): F[Option[Either[Throwable, IpLocation]]] = (ipAddress, geoService) match {
     case (Right(ipA), Some(gs)) =>
       SR.getCityValue(gs, ipA)
-        .map(loc => loc.map(IpLocation(_)).some)
+        .map(loc => loc.right.map(IpLocation(_)).some) //IpLocation.apply(loc.right.get).some) //
     case (Left(f), _) => Monad[F].pure(Some(Left(f)))
     case _            => Monad[F].pure(None)
   }
